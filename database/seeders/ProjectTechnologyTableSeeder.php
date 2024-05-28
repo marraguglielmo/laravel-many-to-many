@@ -14,13 +14,15 @@ class ProjectTechnologyTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // estraggo un progetto random
-        $project = Project::inRandomOrder()->first();
+        for ($i =  0; $i < 300; $i++) {
+            // estraggo un progetto random
+            $project = Project::inRandomOrder()->first();
 
-        // estraggo un id random da technologies
-        $technology_id = Technology::inRandomOrder()->first()->id;
+            // estraggo un id random da technologies
+            $technology_id = Technology::inRandomOrder()->first()->id;
 
-        // aggiungo la relazione nella tabella pivot
-        $project->technologies()->attach($technology_id);
+            // aggiungo la relazione nella tabella pivot
+            $project->technologies()->attach($technology_id);
+        }
     }
 }

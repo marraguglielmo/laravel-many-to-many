@@ -67,7 +67,13 @@
                         </td>
                         <td>{{ $project->type ? $project->type->title : 'N/A' }}</td>
                         <td>{{ Help::formatDate($project->update_at) }}</td>
-                        <td>{{ $project->languages ? $project->languages : 'N/A' }}</td>
+                        {{-- <td>{{ $project->languages ? $project->languages : 'N/A' }}</td> --}}
+                        <td class="w-25">
+                            @foreach ($project->technologies as $technology)
+                                <span
+                                    class="badge rounded-pill text-bg-warning">{{ $technology->title ? $technology->title : 'N/A' }}</span>
+                            @endforeach
+                        </td>
                         <td><a target="_blank"
                                 href="{{ $project->github_url }}">{{ $project->github_url ? $project->github_url : 'N/A' }}</a>
                         </td>
