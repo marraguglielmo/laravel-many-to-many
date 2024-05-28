@@ -18,7 +18,7 @@ class ProjectTechnologyTableSeeder extends Seeder
         $project = Project::inRandomOrder()->first();
 
         // estraggo un id random da technologies
-        $technology_id = Project::inRandomOrder()->first()->id;
+        $technology_id = Technology::inRandomOrder()->first()->id;
 
         // aggiungo la relazione nella tabella pivot
         $project->technologies()->attach($technology_id);
