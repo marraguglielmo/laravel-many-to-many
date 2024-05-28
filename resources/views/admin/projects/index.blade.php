@@ -1,13 +1,12 @@
 @php
     use App\Functions\Helper as Help;
-
 @endphp
 
 
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container m-0">
+    <div class="project-index container m-0">
         <h2>Index projects</h2>
 
 
@@ -44,7 +43,7 @@
 
         <table class="table crud-table">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Progetto</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Data</th>
@@ -55,7 +54,7 @@
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($projects as $project)
-                    <tr>
+                    <tr class="py-5">
                         <td>
                             {{-- update --}}
                             <form action="{{ route('admin.projects.update', $project) }}" method="POST"
@@ -67,17 +66,21 @@
                         </td>
                         <td>{{ $project->type ? $project->type->title : 'N/A' }}</td>
                         <td>{{ Help::formatDate($project->update_at) }}</td>
-                        {{-- <td>{{ $project->languages ? $project->languages : 'N/A' }}</td> --}}
                         <td class="w-25">
-                            @foreach ($project->technologies as $technology)
-                                <span
-                                    class="badge rounded-pill text-bg-warning">{{ $technology->title ? $technology->title : 'N/A' }}</span>
-                            @endforeach
+                            {{-- @dump($project) --}}
+                            @forelse ($project->technologies as $technology)
+                                <span class="badge rounded-pill text-bg-warning">{{ $technology->title }}</span>
+                            @empty
+                                <p class="text-danger fw-semibold">Not technologies</p>
+                            @endforelse
                         </td>
                         <td><a target="_blank"
                                 href="{{ $project->github_url }}">{{ $project->github_url ? $project->github_url : 'N/A' }}</a>
                         </td>
-                        <td class="d-flex">
+                        <td class="d-flex actions">
+                            {{-- show --}}
+                            <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success me-2"><i
+                                    class="fa-solid fa-eye"></i></a>
                             <button type="button" onclick="submitForm({{ $project->id }})"
                                 class="btn btn-warning me-2"><i class="fa-solid fa-pencil"></i></button>
 
