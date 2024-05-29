@@ -37,7 +37,6 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         $form_data = $request->all();
-
         $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
 
         $new_project = new Project();

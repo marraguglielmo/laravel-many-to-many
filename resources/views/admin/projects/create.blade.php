@@ -33,7 +33,7 @@
                 </div> --}}
                 <div class="mb-3">
                     <label for="type" class="form-label">Tipo</label>
-                    <select name="price" id="type" placeholder="Tipo"
+                    <select name="type_id" id="type" placeholder="Tipo"
                         class="form-select @error('price') is-invalid @enderror" value="{{ old('type') }}">
                         @foreach ($types as $type)
                             <option value="{{ $type->id }}">{{ $type->title }}</option>
@@ -49,7 +49,7 @@
                     <label for="technologies" class="form-label">Tecnologie utilizzate: </label>
                     <div class="btn-group btn-group-sm" role="group">
                         @foreach ($technologies as $technology)
-                            <input name="tech[]" type="checkbox" class="btn-check" autocomplete="off"
+                            <input name="technologies" type="checkbox" class="btn-check" autocomplete="off"
                                 id="tech_{{ $technology->id }}" value="{{ $technology->id }}">
                             <label class="btn btn-outline-success fw-semibold border-2"
                                 for="tech_{{ $technology->id }}">{{ $technology->title }}</label>
@@ -62,8 +62,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="date" class="form-label">Data creazione</label>
-                    <input type="date" name="date" id="date"
+                    <label for="updated_at" class="form-label">Data creazione</label>
+                    <input type="date" name="updated_at" id="date"
                         class="form-control @error('sale_date') is-invalid @enderror" value="{{ old('date') }}">
                     @error('date')
                         <small class="text-danger fw-semibold">
@@ -72,10 +72,10 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="github-url" class="form-label">Github</label>
-                    <input type="text" name="github-url" id="github-url" placeholder="Github URL"
-                        class="form-control @error('artists') is-invalid @enderror" value="{{ old('github-url') }}">
-                    @error('github-url')
+                    <label for="github_url" class="form-label">Github</label>
+                    <input type="text" name="github_url" id="github_url" placeholder="Github URL"
+                        class="form-control @error('artists') is-invalid @enderror" value="{{ old('github_url') }}">
+                    @error('github_url')
                         <small class="text-danger fw-semibold">
                             {{ $message }}
                         </small>
