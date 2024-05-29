@@ -14,7 +14,7 @@ class ProjectTechnologyTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i =  0; $i < 300; $i++) {
+        for ($i =  0; $i < 200; $i++) {
             // estraggo un progetto random
             $project = Project::inRandomOrder()->first();
 
