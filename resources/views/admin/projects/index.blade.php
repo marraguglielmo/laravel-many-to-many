@@ -32,12 +32,16 @@
             @endif
 
             {{-- create --}}
-            <form action="{{ route('admin.projects.store') }}" method="POST" class="d-flex w-50">
+            {{-- <form action="{{ route('admin.projects.store') }}" method="POST" class="d-flex w-50">
                 @csrf
                 <input class="form-control me-2" type="search" placeholder="Aggiungi progetto" aria-label="Search"
                     name="title">
                 <button class="btn btn-outline-success" type="submit">Aggiungi</button>
-            </form>
+            </form> --}}
+
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-outline-success">Aggiungi Progetto</a>
+
+
         </div>
 
 
@@ -64,7 +68,7 @@
                                 <input type="text" value="{{ $project->title }}" name="title">
                             </form>
                         </td>
-                        <td>{{ $project->type ? $project->type->title : 'N/A' }}</td>
+                        <td class="type">{{ $project->type ? $project->type->title : 'N/A' }}</td>
                         <td>{{ Help::formatDate($project->update_at) }}</td>
                         <td class="w-25">
                             {{-- @dump($project) --}}

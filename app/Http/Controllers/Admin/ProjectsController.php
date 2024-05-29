@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
+use App\Models\Technology;
 use App\Functions\Helper as Help;
 
 
@@ -24,7 +26,9 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        $technologies = Technology::all();
+        $types = Type::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -32,18 +36,28 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        $exist = Project::where('title', $request->title)->first();
+        $form_data = $request->all();
 
-        if ($exist) {
-            return redirect()->route('admin.projects.index')->with('error', 'Il progetto è già stato inserito');
-        } else {
-            $new_project = new Project();
-            $new_project->title = $request->title;
-            $new_project->languages = $request->languages;
-            $new_project->slug = Help::generateSlug($new_project->title, Project::class);
-            $new_project->save();
-            return redirect()->route('admin.projects.index')->with('success', 'Il progetto è stato inserito correttamente');
-        }
+        $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
+
+        $new_project = new Project();
+        $new_project->fill($form_data);
+        $new_project->save();
+
+        return redirect()->route('admin.projects.index', $new_project)->with('success', 'Il progetto è stato inserito correttamente');
+
+        // $exist = Project::where('title', $request->title)->first();
+
+        // if ($exist) {
+        //     return redirect()->route('admin.projects.index')->with('error', 'Il progetto è già stato inserito');
+        // } else {
+        //     $new_project = new Project();
+        //     $new_project->title = $request->title;
+        //     $new_project->languages = $request->languages;
+        //     $new_project->slug = Help::generateSlug($new_project->title, Project::class);
+        //     $new_project->save();
+        //     return redirect()->route('admin.projects.index')->with('success', 'Il progetto è stato inserito correttamente');
+        // }
     }
 
     /**
